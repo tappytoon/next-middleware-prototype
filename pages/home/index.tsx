@@ -1,8 +1,8 @@
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import type { ParsedUrlQuery } from 'querystring';
 import { Dictionary } from '../../types';
-import { useRouter } from 'next/router';
 import api from '../../api';
 import { DefaultLocale } from '../../dictionaries';
 
