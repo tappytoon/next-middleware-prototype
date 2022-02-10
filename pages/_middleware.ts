@@ -1,11 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export function middleware(req: NextRequest) {
-    // NEXT_LOCALE Cookies 값에 추가 또는 아래 코드 추가
-    // const locale = req.cookies['LOCALE'] || req.headers.get('accept-language')?.split(',')?.[0] || 'en';
+const LANG_REX = /(en|fr|de)/;
 
-    if (req.nextUrl.pathname === '/') {
-        req.nextUrl.pathname = '/home';
-        return NextResponse.redirect(req.nextUrl);
+const stripDefaultLocale = (str: string): string => {
+    const stripped = str.replace('/default', '');
+    return stripped;
+};
+
+export function middleware(req: NextRequest) {
+    const isDefaultLocale = req.nextUrl.locale === 'default';
+
+    if (isDefaultLocale) {
+        // NEXT_LOCALE Cookies 값에 추가시 next 자동 감지
+        const locale = req.cookies['NEXT_LOCALE'] || req.headers.get('accept-language')?.split(',')?.[0] || 'en';
+        const isSupportedLocale = LANG_REX.test(locale);
+        const passedLocale = isSupportedLocale ? locale : 'en';
+        const pathname = req.nextUrl.pathname;
+
+        return NextResponse.redirect(
+            `/${passedLocale}${stripDefaultLocale(pathname)}${
+                req.nextUrl.search
+            }`,
+        );
     }
 }
