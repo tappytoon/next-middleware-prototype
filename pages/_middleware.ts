@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-const LANG_REX = /(en|fr|de)/;
+import nextConfig from 'next.config';
 
 const stripDefaultLocale = (str: string): string => {
     const stripped = str.replace('/default', '');
@@ -8,17 +7,17 @@ const stripDefaultLocale = (str: string): string => {
 };
 
 export function middleware(req: NextRequest) {
-    const isDefaultLocale = req.nextUrl.locale === 'default';
+    const supportedLocale = nextConfig?.i18n?.locales || [];
+    const pathname = req.nextUrl.pathname;
+    const isDefaultLocale = req.nextUrl.locale === 'default' || pathname === '/';
 
     if (isDefaultLocale) {
-        // NEXT_LOCALE Cookies 값에 추가시 next 자동 감지
         const locale = req.cookies['NEXT_LOCALE'] || req.headers.get('accept-language')?.split(',')?.[0] || 'en';
-        const isSupportedLocale = LANG_REX.test(locale);
-        const passedLocale = isSupportedLocale ? locale : 'en';
-        const pathname = req.nextUrl.pathname;
+        const passedLocale = supportedLocale.includes(locale) ? locale : 'en';
+        const passedPathname = pathname === '/' ? '/home' : pathname;
 
         return NextResponse.redirect(
-            `/${passedLocale}${stripDefaultLocale(pathname)}${
+            `/${passedLocale}${stripDefaultLocale(passedPathname)}${
                 req.nextUrl.search
             }`,
         );

@@ -1,20 +1,15 @@
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import type { ParsedUrlQuery } from 'querystring';
 import { Dictionary } from '../../types';
 import api from '../../api';
 import { DefaultLocale } from '../../dictionaries';
 
-interface Params extends ParsedUrlQuery {
-    locale: string;
-}
 
 interface Props {
     dictionary: Dictionary;
 }
 
-export const getStaticProps: GetStaticProps<unknown, Params> = async ({
+export const getStaticProps: GetStaticProps = async ({
     locale, locales, defaultLocale,
 }) => {
     const dictionary = await api.dictionaries.fetch(locale || DefaultLocale);
@@ -27,7 +22,6 @@ export const getStaticProps: GetStaticProps<unknown, Params> = async ({
 };
 
 export default function Page({ dictionary }: Props) {
-    // const { locale, locales, defaultLocale } = useRouter();
 
     return (
         <div>
