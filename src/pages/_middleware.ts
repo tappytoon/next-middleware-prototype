@@ -1,4 +1,3 @@
-import { NextConfig } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
 import nextConfig from 'next.config';
 import { DefaultLocale } from '@assets/dictionaries';
