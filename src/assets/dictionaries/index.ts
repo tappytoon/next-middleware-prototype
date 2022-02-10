@@ -1,4 +1,4 @@
-import { Dictionary } from '@types';
+import { Dictionary } from '@apis';
 
 export const DefaultLocale = 'en';
 

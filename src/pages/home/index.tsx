@@ -1,7 +1,6 @@
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { Dictionary } from '@types';
-import { fetchDictionaires } from '@apis';
+import { fetchDictionaries, Dictionary } from '@apis';
 import { DefaultLocale } from '@assets/dictionaries';
 
 interface Props {
@@ -11,7 +10,7 @@ interface Props {
 export const getStaticProps: GetStaticProps = async ({
     locale, locales, defaultLocale,
 }) => {
-    const dictionary = await fetchDictionaires(locale || DefaultLocale);
+    const dictionary = await fetchDictionaries(locale || DefaultLocale);
     return {
         props: {
             dictionary,
