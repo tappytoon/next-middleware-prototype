@@ -1,8 +1,6 @@
 import { DICTIONARIES } from '@assets/dictionaries';
 import { Dictionary } from '@types';
 
-export default {
-    dictionaries: {
-        fetch: async (locale: string): Promise<Dictionary> => DICTIONARIES[locale],
-    },
-};
+export async function fetchDictionaires(locale: string): Promise<Dictionary> {
+    return DICTIONARIES[locale];
+}
