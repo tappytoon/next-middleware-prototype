@@ -1,5 +1,5 @@
-import { DICTIONARIES } from './dictionaries';
-import { Dictionary } from './types';
+import { DICTIONARIES } from '@assets/dictionaries';
+import { Dictionary } from '@types';
 
 export default {
     dictionaries: {

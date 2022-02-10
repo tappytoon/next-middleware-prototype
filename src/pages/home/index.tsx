@@ -1,9 +1,8 @@
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { Dictionary } from '../../types';
-import api from '../../api';
-import { DefaultLocale } from '../../dictionaries';
-
+import { Dictionary } from '@types';
+import api from '@apis';
+import { DefaultLocale } from '@assets/dictionaries';
 
 interface Props {
     dictionary: Dictionary;

@@ -21,10 +21,22 @@
     "baseUrl": ".",
     "paths": {
       "@pages/*": [
-        "pages/*"
+        "src/pages/*"
       ],
       "@styles/*": [
-        "styles/*"
+        "src/styles/*"
+      ],
+      "@apis": [
+        "src/apis/index.ts"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@types": [
+        "src/types/index.ts"
+      ],
+      "@utils": [
+        "src/utils/index.ts"
       ]
     }
   },

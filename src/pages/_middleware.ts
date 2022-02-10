@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nextConfig from 'next.config';
-
-const stripDefaultLocale = (str: string): string => {
-    const stripped = str.replace('/default', '');
-    return stripped;
-};
+import { stripDefaultLocale } from '@utils';
 
 export function middleware(req: NextRequest) {
     const supportedLocale = nextConfig?.i18n?.locales || [];
